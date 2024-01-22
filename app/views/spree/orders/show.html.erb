@@ -1,0 +1,25 @@
+<div class='order-show container d-flex flex-column align-items-center flex-lg-wrap flex-lg-row justify-content-center' id="order_summary" data-hook>
+  <% if order_just_completed?(@order) %>
+    <%= icon(name: 'check-mark-circle',
+             classes: 'd-block d-lg-none mx-auto order-show-check-mark',
+             width: 56,
+             height: 56) %>
+    <%= icon(name: 'check-mark-circle',
+             classes: 'd-none d-lg-block mx-auto order-show-check-mark',
+             width: 102,
+             height: 102) %>
+    <h5 class="w-100 text-center"><%= Spree.t(:order_success) %></h5>
+    <p class="order-show-explain w-100 text-center"><%= Spree.t(:order_success_explain) %></p>
+  <% end %>
+
+  <div class="order-show-number text-uppercase w-100 d-flex justify-content-around">
+    <p><%= accurate_title %> / <%= pretty_date(@order.completed_at) %></p>
+    <% if spree_current_user.present? && @order.shipped? && @order.has_returnable_products? && @order.has_returnable_line_items? && @order.has_returnable_days? %>
+      <%= link_to(spree.new_order_return_authorization_path(@order), class: 'btn btn-primary font-weight-bold text-uppercase') do %>
+        <span class='glyphicon glyphicon-send'></span>
+        <%= Spree.t(:return_products) %>
+      <% end %>
+    <% end %>
+  </div>
+  <%= render partial: 'spree/shared/order_details', locals: { order: @order } %>
+</div>

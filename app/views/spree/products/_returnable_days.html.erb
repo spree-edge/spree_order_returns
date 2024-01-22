@@ -1,0 +1,9 @@
+<% if @product.product_return_data.dig("returnable") =='1'%>
+  <div  data-hook='return time'>
+    <p>Product can be returned within
+      <span class='lead'>
+        <%= pluralize(@product.product_return_data.dig("returnable_days"), 'day') %>
+      </span>
+    </p>
+  </div>
+<% end %>
