@@ -1,5 +1,7 @@
 module Spree
   class ReturnAuthorizationsController < StoreController
+  include EnsureOrderReturn
+
     before_action :redirect_unauthorized_access, unless: :spree_current_user
     before_action :load_order, only: [:new, :create, :show]
     before_action :check_item_returnable, only: [:create]
