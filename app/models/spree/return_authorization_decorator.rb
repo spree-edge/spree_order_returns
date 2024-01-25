@@ -21,7 +21,7 @@ module Spree
         end
 
         event :mark_authorized do
-          transition to: :authorized, from: :unauthorized
+          transition to: :authorized, from: :unauthorized, if: -> { Flipper.enabled?(:order_returns, order.store_id) }
         end
       end
     end

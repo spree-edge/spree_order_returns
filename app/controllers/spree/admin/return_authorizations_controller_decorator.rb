@@ -1,6 +1,10 @@
 module Spree
   module Admin
     module ReturnAuthorizationsControllerDecorator
+      def self.prepended(base)
+        base.before_action :include_ensure_order_return_concern, only: :authorize
+      end
+
       def authorize
         @return_authorization = Spree::ReturnAuthorization.find_by(id: params['id'])
         if @return_authorization.stock_location.present?
@@ -16,6 +20,12 @@ module Spree
           flash[:error] = 'Stock Location must be present'
           redirect_to edit_admin_order_return_authorization_path(@order, @return_authorization)
         end
+      end
+
+      private
+
+      def include_ensure_order_return_concern
+        self.class.send(:include, EnsureOrderReturn)
       end
     end
   end
