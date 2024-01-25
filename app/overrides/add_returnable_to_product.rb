@@ -2,7 +2,7 @@ Deface::Override.new(
   virtual_path: 'spree/admin/products/_form',
   name: 'add_returnable_field',
   insert_after: "[data-hook='admin_product_form_promotionable']",
-  text: '<% if Flipper.enabled?(:order_return, current_store.try(:id)) %>
+  text: '<% if Flipper.enabled?(:order_returns, current_store.try(:id)) %>
           <%= f.fields :product_return_data, model: f.object.product_return_data do |field| %>
             <div class="form-group" data-hook="admin_product_form_returnable">
               <%= field.check_box :returnable, checked: @product.product_return_data.dig("returnable") == "1"%>
@@ -20,7 +20,7 @@ Deface::Override.new(
   virtual_path:'spree/admin/products/_form',
   name:'adding_js',
   insert_bottom:"[data-hook='admin_product_form_fields']",
-  text: "<% if Flipper.enabled?(:order_return, current_store.try(:id)) %>
+  text: "<% if Flipper.enabled?(:order_returns, current_store.try(:id)) %>
           <script>
               document.addEventListener('change', function() {
               const returnableCheckbox = document.getElementById('product_product_return_data_returnable');

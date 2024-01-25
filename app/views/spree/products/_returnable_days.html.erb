@@ -1,4 +1,4 @@
-<% if Flipper.enabled?(:order_return, current_store.try(:id)) && @product.product_return_data.dig("returnable") =='1'%>
+<% if Flipper.enabled?(:order_returns, current_store.try(:id)) && @product.product_return_data.dig("returnable") =='1'%>
   <div  data-hook='return time'>
     <p>Product can be returned within
       <span class='lead'>

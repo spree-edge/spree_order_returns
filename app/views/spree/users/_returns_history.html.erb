@@ -1,4 +1,4 @@
-<% if Flipper.enabled?(:order_return, current_store.try(:id)) %>
+<% if Flipper.enabled?(:order_returns, current_store.try(:id)) %>
   <%= link_to(spree.return_authorizations_path, class: 'btn btn-primary pull-right mb-4') do %>
     <span class='glyphicon glyphicon-list-alt'></span>
     <%= Spree.t(:returns_history) %>
