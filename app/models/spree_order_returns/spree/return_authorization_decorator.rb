@@ -8,7 +8,7 @@ module SpreeOrderReturns
         end
 
         base._validate_callbacks.each do |callback|
-          callback.raw_filter.attributes.delete :stock_location if callback.raw_filter.is_a?(ActiveModel::Validations::PresenceValidator)
+          callback.filter.attributes.delete :stock_location if callback.filter.is_a?(ActiveModel::Validations::PresenceValidator)
         end
 
         base.validates :stock_location, presence: true, unless: :user_initiated?

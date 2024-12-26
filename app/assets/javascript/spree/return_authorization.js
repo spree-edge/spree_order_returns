@@ -11,7 +11,7 @@ document.addEventListener("turbo:load", function() {
     var checkedItems = formFields.find('input.add-item:checked')
     $.each(checkedItems, function (i, checkbox) {
       var returnItemRow = $(checkbox).parents('tr')
-      var amount = parseInt(returnItemRow.find('.refund-amount-input').val(), 10)
+      var amount = parseFloat(returnItemRow.find('.refund-amount-input').val())
 
       totalPretaxRefund += amount
     })

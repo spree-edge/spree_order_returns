@@ -14,14 +14,12 @@
 
   <div class="order-show-number text-uppercase w-100 d-flex justify-content-around">
     <p><%= accurate_title %> / <%= pretty_date(@order.completed_at) %></p>
-    <% if Flipper.enabled?(:order_returns, current_store.try(:id)) %>
       <% if spree_current_user.present? && @order.shipped? && @order.has_returnable_products? && @order.has_returnable_line_items? && @order.has_returnable_days? %>
         <%= link_to(spree.new_order_return_authorization_path(@order), class: 'btn btn-primary font-weight-bold text-uppercase') do %>
           <span class='glyphicon glyphicon-send'></span>
           <%= Spree.t(:return_products) %>
         <% end %>
       <% end %>
-    <% end %>
   </div>
   <%= render partial: 'spree/shared/order_details', locals: { order: @order } %>
 </div>
